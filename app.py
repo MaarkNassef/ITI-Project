@@ -5,7 +5,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY']='SK'
 @app.route('/')
 def index():
-    return render_template('base.html')
+    return render_template('index.html')
 
 
 @app.route('/signUp',methods=['POST','GET'])
