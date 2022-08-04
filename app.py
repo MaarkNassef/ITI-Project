@@ -32,15 +32,16 @@ def signUp():
 @app.route('/signIn',methods=['POST','GET'])
 def signIn():
     if request.method=='POST':
-
         email = request.form['email']
         password = request.form['password']
         connect = sqlite3.connect('Database.db')
-        row=connect.execute(f"select Email,Password where email='{email}'")
+        row=connect.execute(f"select Password from Users where Email='{email}';")
+        row = row.fetchone()
         db.close_db(connect)
-        if row != None:
-            redirect(url_for('index'))
+        if row[0] == password:
+            return redirect(url_for('index'))
         else:
+            flash("Password doesn't match!!") 
             return render_template('SignIn.html')
     else:
         return render_template('SignIn.html')

@@ -66,8 +66,8 @@
                           <input type="password"  required name="repPassword" id="form3Example4cdg" class="form-control" />
                           <label class="form-label" for="form3Example4cdg">Repeat your password</label>
                         </div>
-                        {% for message in get_flashed_messages() %}
-                            {{message}}
+                        {% for message in get_flashed_messages()[0:1] %}
+                            <h6 style="text-align: center; color:red">{{message}}</h6>
                         {% endfor %}
         
                         <div class="form-check d-flex justify-content-center mb-5">
