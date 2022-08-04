@@ -28,9 +28,19 @@ def signUp():
         
     else:
         return render_template('SignUp.html')
-    
-
 
 @app.route('/signIn',methods=['POST','GET'])
 def signIn():
-    return render_template('SignIn.html')
+    if request.method=='POST':
+
+        email = request.form['email']
+        password = request.form['password']
+        connect = sqlite3.connect('Database.db')
+        row=connect.execute(f"select Email,Password where email='{email}'")
+        db.close_db(connect)
+        if row != None:
+            redirect(url_for('index'))
+        else:
+            return render_template('SignIn.html')
+    else:
+        return render_template('SignIn.html')
