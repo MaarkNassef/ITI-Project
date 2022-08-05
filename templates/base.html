@@ -51,8 +51,10 @@
         <li class="nav-item"><a href="#" class="nav-link px-2" style="color:white;">About</a></li>
       </ul>
       <ul class="nav">
+        {% block login %}
         <li class="nav-item"><a href="{{url_for('signIn')}}" class="nav-link text-white px-2">Login</a></li>
         <li class="nav-item"><a href="{{url_for('signUp')}}" class="nav-link text-white px-2">Sign up</a></li>
+        {% endblock %}
       </ul>
     </div>
   </nav>

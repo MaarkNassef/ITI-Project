@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% block title %}Home{% endblock %}
+{% block login %}
+  <li class="nav-item"><a href="{{url_for('signIn')}}" class="nav-link text-white px-2">Log out</a></li>
+{% endblock %}
 {% block content %}
-
 <div class="row row-cols-1 row-cols-md-4 g-4" style="margin-left: 10%; margin-right: 10%; padding-left: 1%; padding-right: 1%;">
     {% for i in range(15) %}
     <div class="col">
