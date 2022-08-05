@@ -9,6 +9,7 @@ def index():
     cur=connect.cursor()
     cur.execute("select * from Books")
     data=cur.fetchall()
+    connect.close()
     return render_template('index.html',data=data)
 
 
@@ -49,3 +50,12 @@ def signIn():
             return render_template('SignIn.html')
     else:
         return render_template('SignIn.html')
+
+@app.route('/book/<int:id>')
+def book(id):
+    connect = sqlite3.connect('Database.db')
+    cur=connect.cursor()
+    cur.execute(f"select * from Books WHERE book_id = {id};")
+    data=cur.fetchone()
+    connect.close()
+    return render_template('book.html', data=data)

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}{{data[1]}}{% endblock %}
+{% block login %}
+  <li class="nav-item"><a href="{{url_for('signIn')}}" class="nav-link text-white px-2">Log out</a></li>
+{% endblock %}
+{% block content %}
+<div class="mask d-flex align-items-center h-100">
+    <div class="container justify-content-center h-100">
+        <div class="card" style="border-radius: 15px;">
+            <h2 class="text-uppercase text-center mb-4 text-dark" style="padding: 30px;">{{data[1]}}</h2>
+            <div class="row">
+              <div class="col-3"><img src="{{data[6]}}" style="padding-left: 5%; padding-bottom: 5%; border-radius: 15px;" width="100%"></div>
+              <div class="col-8 align-content-md-center" style="padding-left: 2%; padding-right: 2%;">
+                <h3 class="text-dark">{{data[2]}}</h3>
+                <h5 class="text-dark">{{data[3]}}</h5>
+                <h5 class="text-dark">{{data[4]}} Stars</h5>
+                <h5 class="text-dark" style="margin-top: 5%;">{{data[5]}}</h5>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>
+{% endblock %}
