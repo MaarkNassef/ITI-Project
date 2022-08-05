@@ -5,7 +5,11 @@ app = Flask(__name__)
 app.config['SECRET_KEY']='SK'
 @app.route('/')
 def index():
-    return render_template('index.html')
+    connect = sqlite3.connect('Database.db')
+    cur=connect.cursor()
+    cur.execute("select * from Books")
+    data=cur.fetchall()
+    return render_template('index.html',data=data)
 
 
 @app.route('/signUp',methods=['POST','GET'])
