@@ -71,8 +71,11 @@ def book(id):
         print(GLOBAL.getEmail())
         cur.execute(f"""INSERT INTO Comments (book_id,User_id,book_comm) VALUES('{id}','{GLOBAL.getUserId(GLOBAL.getEmail())}','{comme}');""")
         connect.commit()
+    cur = connect.cursor()
+    cur.execute(f"SELECT u.Name,c.book_comm FROM Users u, Comments c WHERE c.book_id = '{id}' AND u.id = c.User_id ORDER BY c.comm_id DESC;")
+    comments = cur.fetchall()
     connect.close()
-    return render_template('book.html', data=data)
+    return render_template('book.html', data=data, comments=comments)
  
 @app.route('/search/<word>',methods=['GET','POST'])
 def search(word):
