@@ -73,3 +73,18 @@ def search(word):
     conn.close()
     return render_template('search.html',rows=rows)
 
+@app.route('/category',methods=['GET','POST'])
+def category():
+    if request.method=='POST':
+        search=request.form['category']
+        print('**************************************************')
+        print(search)
+        print('*************************************************')
+    conn = sqlite3.connect('Database.db')
+    cur = conn.cursor()
+    query = f"SELECT * FROM Books WHERE LOWER(Category) LIKE LOWER('%{search}%');"
+    cur.execute(query)
+    rows = cur.fetchall()
+    conn.close()
+    return render_template('SignIn.html',rows=rows)
+
