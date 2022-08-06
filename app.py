@@ -1,6 +1,10 @@
+from ast import Global, If
 from flask import Flask, redirect, render_template,request, url_for,flash
 import sqlite3
 import db
+import GLOBAL
+
+
 app = Flask(__name__)
 app.config['SECRET_KEY']='SK'
 @app.route('/',methods=['GET','POST'])
@@ -20,11 +24,13 @@ def signUp():
     if request.method=="POST":
         name = request.form['name']
         email = request.form['email']
+        
         password = request.form['password']
         repPassword = request.form['repPassword']
         connect = sqlite3.connect('Database.db')
         if password==repPassword:
             connect.execute(f"""INSERT INTO Users (Name,Email,Password) VALUES('{name}','{email}','{password}');""")
+            GLOBAL.userEmail= email
             connect.commit()
             db.close_db(connect) 
             return redirect(url_for('index'))
@@ -44,6 +50,8 @@ def signIn():
         row = row.fetchone()
         db.close_db(connect)
         if row[0] == password:
+            GLOBAL.userEmail= email
+            print(GLOBAL.userEmail)
             return redirect(url_for('index'))
         else:
             flash("Password doesn't match!!") 
@@ -51,12 +59,18 @@ def signIn():
     else:
         return render_template('SignIn.html')
 
-@app.route('/book/<int:id>')
+@app.route('/book/<int:id>',methods=['GET','POST'])
 def book(id):
     connect = sqlite3.connect('Database.db')
     cur=connect.cursor()
     cur.execute(f"select * from Books WHERE book_id = {id};")
     data=cur.fetchone()
+    if request.method=='POST':
+        comme = request.form['comm']
+        cur = connect.cursor()
+        print(GLOBAL.getEmail())
+        cur.execute(f"""INSERT INTO Comments (book_id,User_id,book_comm) VALUES('{id}','{GLOBAL.getUserId(GLOBAL.getEmail())}','{comme}');""")
+        connect.commit()
     connect.close()
     return render_template('book.html', data=data)
  
@@ -72,4 +86,5 @@ def search(word):
     rows = cur.fetchall()
     conn.close()
     return render_template('search.html',rows=rows)
+
 
