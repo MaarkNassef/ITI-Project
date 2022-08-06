@@ -44,9 +44,9 @@
             Categories
           </a>
           <ul class="dropdown-menu dropdown-menu-light">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item" href="{{url_for('search',word='Philosophy')}}">Philosophy</a></li>
+            <li><a class="dropdown-item" href="{{url_for('search',word='Science fiction')}}">Science fiction</a></li>
+            <li><a class="dropdown-item" href="{{url_for('search',word='Adventure')}}">Adventure</a></li>
           </ul>
         </li>
         <li class="nav-item"><a href="#" class="nav-link px-2" style="color:white;">About</a></li>
@@ -79,9 +79,9 @@
           Categories
         </a>
         <ul class="dropdown-menu dropdown-menu-light">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
+          <li><a class="dropdown-item" href="{{url_for('search',word='Philosophy')}}">Philosophy</a></li>
+            <li><a class="dropdown-item" href="{{url_for('search',word='Science fiction')}}">Science fiction</a></li>
+            <li><a class="dropdown-item" href="{{url_for('search',word='Adventure')}}">Adventure</a></li>
         </ul>
       </li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
