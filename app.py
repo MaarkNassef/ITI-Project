@@ -4,7 +4,7 @@ import sqlite3
 import db
 import GLOBAL
 
-
+#hello
 app = Flask(__name__)
 app.config['SECRET_KEY']='SK'
 @app.route('/',methods=['GET','POST'])
