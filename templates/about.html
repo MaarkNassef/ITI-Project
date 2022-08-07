@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block title %}About{% endblock %}
+{% block login %}
+{% if GLOBAL.isSignedIn(): %}
+<li class="nav-item"><a href="{{url_for('signIn')}}" class="nav-link text-white px-2">Log out</a></li>
+{% endif %}
+
+{% endblock %}
