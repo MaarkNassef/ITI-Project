@@ -1,6 +1,6 @@
 import sqlite3
-userEmail = ''
 
+userEmail = ''
 
 def getUserId(email):
     print(email)
@@ -14,3 +14,6 @@ def getUserId(email):
 
 def getEmail():
     return userEmail
+
+def isSignedIn():
+    return not(userEmail == '')

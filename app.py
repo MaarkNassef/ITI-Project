@@ -9,6 +9,8 @@ app = Flask(__name__)
 app.config['SECRET_KEY']='SK'
 @app.route('/',methods=['GET','POST'])
 def index():
+    if not(GLOBAL.isSignedIn()):
+        return redirect(url_for('signIn'))
     if request.method=='POST':
         search=request.form['search']
         return redirect(url_for('search',word=search))      
@@ -42,6 +44,7 @@ def signUp():
 
 @app.route('/signIn',methods=['POST','GET'])
 def signIn():
+    GLOBAL.userEmail = ''
     if request.method=='POST':
         email = request.form['email']
         password = request.form['password']
@@ -61,6 +64,8 @@ def signIn():
 
 @app.route('/book/<int:id>',methods=['GET','POST'])
 def book(id):
+    if not(GLOBAL.isSignedIn()):
+        return redirect(url_for('signIn'))
     connect = sqlite3.connect('Database.db')
     cur=connect.cursor()
     cur.execute(f"select * from Books WHERE book_id = {id};")
@@ -79,6 +84,8 @@ def book(id):
  
 @app.route('/search/<word>',methods=['GET','POST'])
 def search(word):
+    if not(GLOBAL.isSignedIn()):
+        return redirect(url_for('signIn'))
     if request.method=='POST':
         search=request.form['search']
         word=search
