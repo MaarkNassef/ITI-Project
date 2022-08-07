@@ -4,7 +4,6 @@ import sqlite3
 import db
 import GLOBAL
 
-#hello
 app = Flask(__name__)
 app.config['SECRET_KEY']='SK'
 @app.route('/',methods=['GET','POST'])
@@ -97,4 +96,7 @@ def search(word):
     conn.close()
     return render_template('search.html',rows=rows)
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
